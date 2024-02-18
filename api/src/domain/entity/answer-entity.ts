@@ -1,4 +1,4 @@
-import UUIDGenerator from './UUIDGenarator'
+import UUIDGenerator from './uuid-generator'
 
 export default class AnswerEntity {
     constructor(
@@ -16,4 +16,3 @@ export default class AnswerEntity {
         return new AnswerEntity( answerId,answer, questionId,userId, createdAt, null)
     }
 }
-
