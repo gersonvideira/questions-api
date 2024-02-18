@@ -9,7 +9,7 @@
 // }
 
 export namespace Answer {
-   export interface model {
+   export interface Model {
         answerId: string
         questionId: string
         userId: string | null
