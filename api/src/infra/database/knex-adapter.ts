@@ -1,12 +1,12 @@
 import knex, { Knex as knexType } from 'knex'
-import { Answer, Question, User } from '@domain/model'}
+import { Answer, Question, User } from '@domain/model/index'
 import DatabaseConnection from './database-connection'
 
 
 interface DatabaseTables {
-    user: User.Model
-    answer: Answer.Model
-    question: Question.Model
+    users: User.Model
+    answers: Answer.Model
+    questions: Question.Model
 }
 
 export enum DatabaseTableNames {
@@ -15,12 +15,11 @@ export enum DatabaseTableNames {
     QUESTIONS = 'questions',
 }
 
-type KnexTypeAdapter = knexType<DatabaseTables>
-
-
+export type KnexTypeAdapter = knexType<DatabaseTables>
 
 export default class KnexAdapter implements DatabaseConnection {
     private connection: KnexTypeAdapter
+
     constructor(){
         this.connection = {} as KnexTypeAdapter
     }
@@ -49,5 +48,4 @@ export default class KnexAdapter implements DatabaseConnection {
     get instance(): KnexTypeAdapter {
         return this.connection
     }
-
 }
