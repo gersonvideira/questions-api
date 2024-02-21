@@ -20,7 +20,7 @@ expressAdapter.listen(5000)
 //     userId: UUIDGenerator.generate(),
 //     name:"Jonh Doe",
 //     email:"jonh@teste.com",
-    // password:"12345",
+// password:"12345",
 //     pictureUrl:'foto.jpg',
 //     createdAt: new Date(),
 //     updatedAt: null

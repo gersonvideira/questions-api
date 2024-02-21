@@ -1,3 +1,3 @@
 export default  interface HttpSever {
-    listen(port: number): void
+  listen(port: number): void
 }

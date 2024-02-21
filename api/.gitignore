@@ -6,3 +6,6 @@
 **/coverage
 **/data
 **/.env.development
+ExpressAdapter.ts
+iHttpServer.ts
+**/iServer
