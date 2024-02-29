@@ -6,3 +6,4 @@ export default interface UserRepository {
   update(user: UserEntity):Promise<UserEntity>
   findByEmail(email:string):Promise<UserEntity | null>
 }
+

@@ -1,8 +1,9 @@
-import { Request, Response } from "express";}
+import { Request, Response } from "express";
 import { User } from "@pplication/controller/user-crtl";
 import CreateUserUseCase from "@pplication/usercase/user/create-user-usecase";
 
 export default class UserController implements User.Controller {
+
   async create(request: Request, response: Response): Promise<void> {
     const { email, password} = request.body
     const userDate = {email,password}

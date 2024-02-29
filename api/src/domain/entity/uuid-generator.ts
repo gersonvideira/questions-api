@@ -6,3 +6,4 @@ export default class UUIDGenerator {
         return crypto.randomUUID()
     }
 }
+

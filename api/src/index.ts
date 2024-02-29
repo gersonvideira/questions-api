@@ -4,9 +4,18 @@ import UserDAO from "@infra/database/dao/user-dao";
 import KnexAdapter from "@infra/database/knex-adapter";
 import UUIDGenerator from "@domain/entity/uuid-generator";
 import ExpressAdapter  from "@infra/http/express-adapter";
+import Registry from "@infra/di/register";
+import UserRepositoryImpl from "@infra/database/repository/user-repository-implementation";
 
 
 LoadEnv.load()
+const knexAdapter = new KnexAdapter()
+knexAdapter.connect()
+const userDAO = new UserDAO(knexAdapter.instance)
+const userRepository = new UserRepositoryImpl(userDAO)
+const registry = Registry.getInstance()
+registry.register('UserRepository',userRepository)
+
 
 const expressAdapter = new ExpressAdapter()
 expressAdapter.listen(5000)

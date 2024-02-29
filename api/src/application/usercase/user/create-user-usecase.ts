@@ -1,4 +1,5 @@
 import UserEntity from "@domain/entity/user-entity"
+import Registry from "@infra/di/register"
 import UserRepository from "@pplication/repository/user-respository"
 
 
@@ -14,8 +15,12 @@ namespace UserCreate {
   }
 }
 
-export default class CreateUserUseCase implements Omit<UserRepository, "create"| "update" | "findByEmail"> {
-  constructor(private readonly userRepository: UserRepository){}
+export default class CreateUserUseCase  {
+  private readonly userRepository: UserRepository
+  constructor(){
+    const registery = Registry.getInstance()
+    this.userRepository = registery.resolve<UserRepository>('UserRepository')
+  }
   async execute(userData: UserCreate.Input): Promise<UserCreate.Output>{
 
     const userExist = await this.userRepository.findByEmail(userData.email)
@@ -29,5 +34,6 @@ export default class CreateUserUseCase implements Omit<UserRepository, "create"|
       createdAt: user.createdAt
     }
   }
+
 
 }

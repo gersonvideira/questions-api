@@ -1,5 +1,4 @@
 
-
 export namespace User {
   export interface Controller {
     create(request:any, response:any):Promise<void>
