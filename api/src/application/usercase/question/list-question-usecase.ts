@@ -3,11 +3,7 @@ import Registry from "@infra/di/register"
 import QuestionRepository from "@pplication/repository/question-respository"
 
 
-namespace QuestionCreate {
-  export interface Input {
-    question:string
-    userId: string
-  }
+namespace Question {
   export interface Output {
     questionId: string
     question: string
@@ -15,20 +11,22 @@ namespace QuestionCreate {
   }
 }
 
-export default class CreateQuestionUseCase  {
+export default class ListQuestionUseCase  {
   private readonly questionRepository: QuestionRepository
+
   constructor(){
     const registery = Registry.getInstance()
     this.questionRepository = registery.resolve<QuestionRepository>('QuestionRepository')
   }
-  async execute(questionData: QuestionCreate.Input): Promise<QuestionCreate.Output>{
-    const question = QuestionEntity.create(questionData.question,questionData.userId)
-    await this.questionRepository.create(question)
+  async execute(userId:string): Promise<Question.Output[]>{
+    const questions = await this.questionRepository.list(userId)
 
-    return {
+    const outputQuestions = questions.map((question) => ({
       questionId: question.questionId,
       question: question.question,
-      createdAt: question.createdAt
-    }
+      createdAt: question.createdAt,
+    }))
+
+    return outputQuestions
   }
 }
