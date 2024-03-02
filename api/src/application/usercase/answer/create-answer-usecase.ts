@@ -1,16 +1,17 @@
 import AnswerEntity from "@domain/entity/answer-entity"
-import Registry from "@infra/di/register"
 import AnswerRepository from "@pplication/repository/answer-respository"
+import Registry from "@infra/di/register"
 
 
 namespace AnswerCreate {
   export interface Input {
-    email:string
-    password: string
+    questionId:string
+    answer: string
+    userId: string | null
   }
   export interface Output {
-    userId: string
-    email: string
+    answerId: string
+    answer: string
     createdAt: Date
   }
 }
@@ -23,17 +24,17 @@ export default class CreateAnswerUseCase  {
   }
   async execute(answerData: AnswerCreate.Input): Promise<AnswerCreate.Output>{
 
-    const userExist = await this.answerRepository.findByEmail(answerData.email)
-    if (userExist) throw new Error('User already exists!')
+    const answer = AnswerEntity.create(
+      answerData.questionId,
+      answerData.answer,
+      answerData.userId,
+      )
+    await this.answerRepository.create(answer)
 
-    const user = AnswerEntity.create(answerData.email,answerData.password)
-    await this.answerRepository.create(user)
     return {
-      userId: user.userId,
-      email: user.email,
-      createdAt: user.createdAt
+      answerId: answer.answerId,
+      answer: answer.answer,
+      createdAt: answer.createdAt
     }
   }
-
-
 }

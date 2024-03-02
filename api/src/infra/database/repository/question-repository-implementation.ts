@@ -1,7 +1,7 @@
 import QuestionRepository from "@pplication/repository/question-respository";
 import QuestionEntity from "@domain/entity/question-entity";
-import QuestionDAO from "@infra/database/dao/question-dao";
 import { Question } from "@domain/model";
+import QuestionDAO from "@infra/database/dao/question-dao";
 
 
 
@@ -10,36 +10,37 @@ export default class QuestionRepositoryImpl implements QuestionRepository {
 
   private toEntity(question: Question.Model):QuestionEntity {
     return new QuestionEntity(
-      question.questionId, user.name, user.email, user.password,
-      user.pictureUrl,user.createdAt,user.updatedAt
+      question.questionId, question.question, question.userId, question.createdAt,
+      question.updatedAt
       )
     }
 
-    private toModel(user: QuestionEntity):Question.Model {
+    private toModel(question: QuestionEntity):Question.Model {
       return{
-        userId:user.userId, name:user.name, email:user.email,
-        password:user.password, pictureUrl:user.pictureUrl,
-        createdAt:user.createdAt, updatedAt:user.updatedAt
+        questionId:question.questionId, question: question.question, userId: question.userId,
+        createdAt: question.createdAt, updatedAt: question.updatedAt
+
       }
     }
 
-    async  create(user: QuestionEntity): Promise<QuestionEntity> {
-      await this.questionDAO.create(this.toModel(user))
-      return user
+    async  create(question: QuestionEntity): Promise<QuestionEntity> {
+      await this.questionDAO.create(this.toModel(question))
+      return question
     }
 
-    async update(user: QuestionEntity): Promise<QuestionEntity> {
-      await this.questionDAO.update(this.toModel(user))
-      return user
+    async list(userId: string): Promise<QuestionEntity[]> {
+      const questions = await this.questionDAO.list(userId)
+      const listQuestion = questions.map((question) => this.toEntity(question))
+      return listQuestion
     }
 
-    async findByEmail(email: string): Promise<QuestionEntity | null> {
-      const user = await this.questionDAO.findByEmail(email)
-      if(!user) return null
-      return this.toEntity(user)
+    async delete(questionId: string): Promise<void> {
+      await this.questionDAO.delete(questionId)
     }
-
-
 
 
   }
+  
+
+
+
