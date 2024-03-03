@@ -20,13 +20,15 @@ export default class RouterFactory {
   register(): Router{
     const router = Router()
 
-    router.post('/answer', this.answerCtrl.create)
+    // router.post('/answer', this.answerCtrl.create)
 
     router.post('/question', this.questionCtrl.create)
-    router.get('/question', this.questionCtrl.list)
+    router.post('/question/:questionId/answers', this.questionCtrl.create)
+    // router.get('/question/:questionId/answer', this.questionCtrl.list)
     router.delete('/question', this.questionCtrl.delete)
 
     router.post('/user', this.userCtrl.create)
+    router.get('/user/:userId/questions', this.questionCtrl.list)
 
     return router
   }

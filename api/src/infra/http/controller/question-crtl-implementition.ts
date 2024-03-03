@@ -12,7 +12,7 @@ export default class QuestionController implements Question.Controller {
     response.status(201).json(newQuestion)
   }
   async list(request: Request, response: Response): Promise<void> {
-    const {userId} = request.params
+    const { userId } = request.params
     const question = await new ListQuestionUseCase().execute(userId)
     response.status(200).json(question)
   }
@@ -21,5 +21,5 @@ export default class QuestionController implements Question.Controller {
     await new DeleteQuestionUseCase().execute(questionId)
     response.status(200).send()
   }
-  
+
 }
