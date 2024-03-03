@@ -22,7 +22,7 @@ export default class CreateQuestionUseCase  {
     this.questionRepository = registery.resolve<QuestionRepository>('QuestionRepository')
   }
   async execute(questionData: QuestionCreate.Input): Promise<QuestionCreate.Output>{
-    const question = QuestionEntity.create(questionData.question,questionData.userId)
+    const question = QuestionEntity.create(questionData.userId,questionData.question)
     await this.questionRepository.create(question)
 
     return {
