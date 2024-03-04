@@ -8,6 +8,7 @@ export default class QuestionDAO implements DAO<Question.Model>{
   constructor(private readonly connection: KnexTypeAdapter){}
 
   async create(data: Question.Model): Promise<Question.Model> {
+  
     const [question] = await this.connection<Question.Model>(this.tableName)
     .insert(data).returning('*')
 

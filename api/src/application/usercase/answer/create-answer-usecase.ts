@@ -5,13 +5,13 @@ import Registry from "@infra/di/register"
 
 namespace AnswerCreate {
   export interface Input {
+    answers: string
     questionId:string
-    answer: string
     userId: string | null
   }
   export interface Output {
-    answerId: string
-    answer: string
+    answersId: string
+    answers: string
     createdAt: Date
   }
 }
@@ -25,15 +25,15 @@ export default class CreateAnswerUseCase  {
   async execute(answerData: AnswerCreate.Input): Promise<AnswerCreate.Output>{
 
     const answer = AnswerEntity.create(
+      answerData.answers,
       answerData.questionId,
-      answerData.answer,
       answerData.userId,
       )
     await this.answerRepository.create(answer)
 
     return {
-      answerId: answer.answerId,
-      answer: answer.answer,
+      answersId: answer.answersId,
+      answers: answer.answers,
       createdAt: answer.createdAt
     }
   }

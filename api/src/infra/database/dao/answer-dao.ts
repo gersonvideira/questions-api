@@ -8,13 +8,14 @@ export default class AnswerDAO implements DAO<Answer.Model>{
     constructor(private readonly connection: KnexTypeAdapter){}
 
     async create(data: Answer.Model): Promise<Answer.Model> {
+
         const [answer] = await this.connection<Answer.Model>(this.tableName)
         .insert(data).returning('*')
         return answer
     }
-    async findById(answerId: string): Promise<Answer.Model | null> {
+    async findById(answersId: string): Promise<Answer.Model | null> {
         const data = await this.connection<Answer.Model>(this.tableName)
-        .where({answerId}).first()
+        .where({answersId}).first()
 
         if(!data) return null
         return data

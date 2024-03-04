@@ -9,10 +9,10 @@ export default class AnswerRepositoryImpl implements AnswerRepository {
   constructor(private readonly answerDAO: AnswerDAO){}
     private toModel(answer: AnswerEntity):Answer.Model {
       return{
-        answerId:answer.answerId,
+        answersId:answer.answersId,
+        answers: answer.answers,
         questionId: answer.questionId,
         userId:answer.userId,
-        answer: answer.answer,
         createdAt:answer.createdAt,
         updatedAt:answer.updatedAt
       }
