@@ -40,7 +40,7 @@ export default class QuestionRepositoryImpl implements QuestionRepository {
 
 
   }
-  
+
 
 
 
