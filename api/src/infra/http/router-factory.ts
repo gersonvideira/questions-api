@@ -24,8 +24,8 @@ export default class RouterFactory {
 
     router.post('/question', this.questionCtrl.create)
     router.post('/question/:questionId/answers', this.answerCtrl.create)
-    // router.get('/question/:questionId/answer', this.questionCtrl.list)
-    router.delete('/question', this.questionCtrl.delete)
+    router.get('/question/:questionId/answers', this.answerCtrl.list)
+    router.delete('/question/:userId/:questionId', this.questionCtrl.delete)
 
     router.post('/user', this.userCtrl.create)
     router.get('/user/:userId/questions', this.questionCtrl.list)

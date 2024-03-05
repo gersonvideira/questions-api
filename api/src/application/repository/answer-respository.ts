@@ -2,6 +2,7 @@ import AnswerEntity from "@domain/entity/answer-entity";
 
 
 export default interface AnswerRepository {
-  create(question: AnswerEntity):Promise<AnswerEntity>
+  create(answer: AnswerEntity):Promise<AnswerEntity>
+  list(questionId: string):Promise<AnswerEntity[]>
 }
 

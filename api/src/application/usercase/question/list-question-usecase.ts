@@ -19,7 +19,7 @@ export default class ListQuestionUseCase  {
     this.questionRepository = registery.resolve<QuestionRepository>('QuestionRepository')
   }
   async execute(userId:string): Promise<Question.Output[]>{
-    
+
     const questions = await this.questionRepository.list(userId)
     const outputQuestions = questions.map((question) => ({
       questionId: question.questionId,
