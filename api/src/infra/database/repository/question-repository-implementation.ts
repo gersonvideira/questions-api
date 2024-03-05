@@ -35,13 +35,7 @@ export default class QuestionRepositoryImpl implements QuestionRepository {
       return listQuestion
     }
 
-    // Ter em atenção o any do restorno
-
-    async listAnswers(questionId: string): Promise<QuestionEntity[]> {
-      const answers = await this.questionDAO.list(questionId)
-      const listAnswer = answers.map((answer) => this.toEntity(answer))
-      return listAnswer
-    }
+  
 
     async delete(questionId: string): Promise<void> {
       await this.questionDAO.delete(questionId)
