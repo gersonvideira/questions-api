@@ -6,4 +6,3 @@ export default interface QuestionRepository {
   list(userId:string):Promise<QuestionEntity[]>
   delete(questionId:string):Promise<void>
 }
-
